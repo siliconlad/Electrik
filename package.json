@@ -1,0 +1,14 @@
+{
+  "name": "electrik",
+  "version": "0.0.1",
+  "description": "A logic gate simulator.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Siliconlad",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^7.1.4"
+  }
+}
