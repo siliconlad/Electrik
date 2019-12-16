@@ -9,6 +9,7 @@
   "author": "Siliconlad",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^7.1.4"
+    "electron": "^7.1.4",
+    "jsplumb": "^2.12.8"
   }
 }
