@@ -3,8 +3,36 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';">
+
+        <script src="node_modules/jsplumb/dist/js/jsplumb.min.js"></script>
+        <script src="script.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="node_modules/jsplumb/css/jsplumbtoolkit-defaults.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-        
+        <div id="menu">
+            <div class="menuItem source and">
+                <p>AND</p>
+            </div>
+            <div class="menuItem source or">
+                <p>OR</p>
+            </div>
+            <div class="menuItem source not">
+                <p>NOT</p>
+            </div>
+            <div class="menuItem source startGate true">
+                <p>1</p>
+            </div>
+            <div class="menuItem source startGate false">
+                <p>0</p>
+            </div>
+            <div id="run" class="menuItem">
+                <p>Run!</p>
+            </div>
+        </div>
+        <div id="outer-canvas">
+            <div id="canvas"></div>
+        </div>
     </body>
 </html>
