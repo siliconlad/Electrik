@@ -1,0 +1,57 @@
+html {
+    background-color: white;
+    user-select: none;
+}
+
+html, body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0;
+}
+
+#menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#outer-canvas {
+    box-sizing: border-box;
+    height: 100%;
+    width: 98%;
+    padding: 0px 30px;
+    margin: auto;
+}
+
+#canvas {
+    height: 100%;
+    position: relative;
+}
+
+.gate {
+    position: absolute;
+    border: 1px solid black;
+    width: 7em;
+    text-align: center;
+}
+
+.menuItem {
+    box-sizing: border-box;
+    border: 1px solid black;
+    width: 100%;
+    text-align: center;
+    float: left;
+}
+
+#run {
+    background: grey;
+}
+
+.menuItem:hover {
+    background: lightgrey;
+}
+
+.jtk-draggable {
+    cursor: grab;
+}
