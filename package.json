@@ -7,9 +7,10 @@
     "start": "electron ."
   },
   "author": "Siliconlad",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "electron": "^7.1.4",
     "jsplumb": "^2.12.8"
-  }
+  },
+  "repository": "github:Siliconlad/Electrik"
 }
