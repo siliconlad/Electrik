@@ -216,4 +216,22 @@ jsPlumb.ready(function() {
 
         return isTrue;
     }
+
+    jsPlumb.bind("connection", (info) => {
+        info.connection.bind("click", (info) => {connectionClick(info)});
+    })
+
+    let selectedElement;
+    function connectionClick(info) {
+        info.connector.svg.classList.add("selected");
+        selectedElement = info;
+    }
+
+    document.onkeydown = function (e) {
+        if (e.key === "Backspace") {
+            jsPlumb.select({
+                source: selectedElement.source
+            }).delete();
+        }
+    }
 });

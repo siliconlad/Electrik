@@ -63,3 +63,8 @@ html, body {
 .jtk-draggable {
     cursor: grab;
 }
+
+.selected path {
+    stroke-width:5;
+    stroke:brown;
+}
