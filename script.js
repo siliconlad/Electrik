@@ -230,6 +230,7 @@ jsPlumb.ready(function() {
         }
 
         info.connector.svg.classList.add("selected");
+        jsPlumb.repaintEverything();
         selectedElement = info;
     }
 
@@ -240,6 +241,7 @@ jsPlumb.ready(function() {
         }
 
         this.classList.add("selected");
+        jsPlumb.repaintEverything();
         selectedElement = this;
     }
 
