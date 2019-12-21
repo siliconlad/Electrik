@@ -76,6 +76,7 @@ jsPlumb.ready(function() {
         // Setting cursor when dragging elements
         div.addEventListener("mousedown", cursorGrabbing);
         div.addEventListener("mouseup", cursorGrab);
+        div.addEventListener("dblclick", gateSelect);
 
         // Creating endpoints
         // Define the input points for each gate
@@ -223,15 +224,44 @@ jsPlumb.ready(function() {
 
     let selectedElement;
     function connectionClick(info) {
+        let prevSelected = document.querySelectorAll(".selected");
+        if (prevSelected.length !== 0) {
+            prevSelected[0].classList.remove("selected");
+        }
+
         info.connector.svg.classList.add("selected");
         selectedElement = info;
     }
 
-    document.onkeydown = function (e) {
-        if (e.key === "Backspace") {
-            jsPlumb.select({
-                source: selectedElement.source
-            }).delete();
+    function gateSelect() {
+        let prevSelected = document.querySelectorAll(".selected");
+        if (prevSelected.length !== 0) {
+            prevSelected[0].classList.remove("selected");
         }
+
+        this.classList.add("selected");
+        selectedElement = this;
     }
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Backspace") {
+            if (selectedElement.classList !== undefined) {
+                if (selectedElement.classList.contains("gate")) {
+                    // Delete connections from gate
+                    jsPlumb.select({source:selectedElement.id}).delete();
+                    jsPlumb.select({target:selectedElement.id}).delete();
+                    // Delete endpoints from gate
+                    jsPlumb.selectEndpoints({source:selectedElement.id}).delete();
+                    jsPlumb.selectEndpoints({target:selectedElement.id}).delete();
+                    // Remove element from DOM
+                    let canvas = document.getElementById("canvas");
+                    canvas.removeChild(selectedElement);
+                }
+            } else {
+                jsPlumb.select({
+                    source: selectedElement.source
+                }).delete();
+            }
+        }
+    })
 });

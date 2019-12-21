@@ -64,6 +64,10 @@ html, body {
     cursor: grab;
 }
 
+.selected:not(svg) {
+    border: 3px solid brown;
+}
+
 .selected path {
     stroke-width:5;
     stroke:brown;
