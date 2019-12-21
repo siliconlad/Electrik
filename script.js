@@ -107,13 +107,28 @@ jsPlumb.ready(function() {
         this.style.cursor = "grab";
     }
 
-    let start = document.getElementById("run");
-    start.addEventListener("click", run);
+    let start = document.getElementById("execute");
+    start.addEventListener("click", execute);
 
-    async function run() {
+    // Because run() is async, the execute function could finish execution before
+    // run does (i.e. infinite loop). run() will continue execution until the
+    // execute button is pressed again and the running class is removed.
+    function execute() {
+        if (this.classList.contains("running")) {
+            this.classList.replace("running", "run");
+            stop(this);
+        } else {
+            this.classList.replace("run", "running");
+            run(this);
+        }
+    }
+
+    async function run(button) {
+        button.innerHTML = "<p>Stop!</p>";
         let gateQueue = Array.prototype.slice.call(document.querySelectorAll(".startGate"));
+        let shouldRun = button.classList.contains("running");
 
-        while (gateQueue.length > 0) {
+        while (gateQueue.length > 0 && shouldRun) {
             console.log("This is inside the while loop");
             let item = gateQueue.shift();
 
@@ -130,8 +145,18 @@ jsPlumb.ready(function() {
                     gateQueue = gateQueue.concat(updateOutput(item, false));
                 }
             }
+            // This seems to let jsPlumb color the connections in an infinite loop
             await new Promise(r => setTimeout(r, 0));
+
+            // Only continue with the while loop if the execute button is active
+            shouldRun = button.classList.contains("running");
         }
+    }
+
+    function stop(button) {
+        button.innerHTML = "<p>Run!</p>";
+        jsPlumb.selectEndpoints().setType("inactive");
+        jsPlumb.select().setType("inactive");
     }
 
     function updateOutput(item, isActive) {

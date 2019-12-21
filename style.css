@@ -44,12 +44,20 @@ html, body {
     float: left;
 }
 
-#run {
+.menuItem:hover {
+    background: lightgrey;
+}
+
+.run {
     background: grey;
 }
 
-.menuItem:hover {
-    background: lightgrey;
+.running {
+    background: red;
+}
+
+.running:hover {
+    background: pink;
 }
 
 .jtk-draggable {
