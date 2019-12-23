@@ -64,6 +64,14 @@ html, body {
     cursor: grab;
 }
 
+.jtk-connector {
+    z-index: 0;
+}
+
+.jtk-endpoint {
+    z-index: 10;
+}
+
 .selected:not(svg) {
     border: 3px solid brown;
 }
