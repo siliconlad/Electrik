@@ -76,7 +76,7 @@ jsPlumb.ready(function() {
         // Setting cursor when dragging elements
         div.addEventListener("mousedown", cursorGrabbing);
         div.addEventListener("mouseup", cursorGrab);
-        div.addEventListener("dblclick", gateSelect);
+        div.addEventListener("click", gateSelect);
 
         // Creating endpoints
         // Define the input points for each gate
