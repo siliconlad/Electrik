@@ -78,6 +78,10 @@ jsPlumb.ready(function() {
         div.addEventListener("mouseup", cursorGrab);
         div.addEventListener("click", gateSelect);
 
+        if (div.classList.contains("startGate")) {
+            div.addEventListener("contextmenu", inputToggle);
+        }
+
         // Creating endpoints
         // Define the input points for each gate
         if (!div.classList.contains("startGate")) {
@@ -245,6 +249,17 @@ jsPlumb.ready(function() {
         selectedElement = this;
     }
 
+    function inputToggle() {
+        if (this.classList.contains("true")) {
+            this.classList.replace("true", "false");
+            this.innerHTML = "<p>0</p>";
+        } else {
+            this.classList.replace("false", "true");
+            this.innerHTML = "<p>1</p>";
+        }
+    }
+
+    // Delete selected element when "delete" key is pressed
     document.addEventListener("keydown", (e) => {
         if (e.key === "Backspace") {
             if (selectedElement.classList !== undefined) {
