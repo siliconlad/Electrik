@@ -61,8 +61,12 @@ jsPlumb.ready(function() {
         canvas.appendChild(div);
 
         // Setting cursor when dragging elements
-        div.addEventListener("mousedown", cursorGrabbing);
-        div.addEventListener("mouseup", cursorGrab);
+        div.addEventListener("mousedown", function() {
+            this.style.cursor = "grabbing";
+        });
+        div.addEventListener("mouseup", function() {
+            this.style.cursor = "grab";
+        });
 
         jsPlumbInit(div);
     }
@@ -73,9 +77,6 @@ jsPlumb.ready(function() {
             containment: true,
         });
 
-        // Setting cursor when dragging elements
-        div.addEventListener("mousedown", cursorGrabbing);
-        div.addEventListener("mouseup", cursorGrab);
         div.addEventListener("click", gateSelect);
 
         if (div.classList.contains("startGate")) {
@@ -102,14 +103,6 @@ jsPlumb.ready(function() {
 
         // Define the output point for each gate
         jsPlumb.addEndpoint(div, outputElement);
-    }
-
-    function cursorGrabbing() {
-        this.style.cursor = "grabbing";
-    }
-
-    function cursorGrab() {
-        this.style.cursor = "grab";
     }
 
     let start = document.getElementById("execute");
