@@ -79,6 +79,17 @@ jsPlumb.ready(function() {
 
         div.addEventListener("click", gateSelect);
 
+        // Prevent div from being selected after being dragged
+        div.addEventListener("mousedown", function() {
+            div.addEventListener("mousemove", removeGateSelect);
+        });
+        div.addEventListener("mouseup", function() {
+            div.removeEventListener("mousemove", removeGateSelect);
+        });
+        div.addEventListener("click", function() {
+            div.addEventListener("click", gateSelect);
+        });
+
         if (div.classList.contains("startGate")) {
             div.addEventListener("contextmenu", inputToggle);
         }
@@ -240,6 +251,10 @@ jsPlumb.ready(function() {
         this.classList.add("selected");
         jsPlumb.repaintEverything();
         selectedElement = this;
+    }
+
+    function removeGateSelect() {
+        this.removeEventListener("click", gateSelect);
     }
 
     function inputToggle() {
