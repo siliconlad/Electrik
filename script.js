@@ -90,8 +90,17 @@ jsPlumb.ready(function() {
             div.addEventListener("click", gateSelect);
         });
 
+        // Toggle input when right-clicked
         if (div.classList.contains("startGate")) {
-            div.addEventListener("contextmenu", inputToggle);
+            div.addEventListener("contextmenu", function() {
+                if (this.classList.contains("true")) {
+                    this.classList.replace("true", "false");
+                    this.innerHTML = "<p>0</p>";
+                } else {
+                    this.classList.replace("false", "true");
+                    this.innerHTML = "<p>1</p>";
+                }
+            });
         }
 
         // Creating endpoints
@@ -116,13 +125,23 @@ jsPlumb.ready(function() {
         jsPlumb.addEndpoint(div, outputElement);
     }
 
-    let start = document.getElementById("execute");
-    start.addEventListener("click", execute);
+    function gateSelect() {
+        let prevSelected = document.querySelectorAll(".selected");
+        if (prevSelected.length !== 0) {
+            prevSelected[0].classList.remove("selected");
+        }
 
-    // Because run() is async, the execute function could finish execution before
-    // run does (i.e. infinite loop). run() will continue execution until the
-    // execute button is pressed again and the running class is removed.
-    function execute() {
+        this.classList.add("selected");
+        jsPlumb.repaintEverything();
+        selectedElement = this;
+    }
+
+    function removeGateSelect() {
+        this.removeEventListener("click", gateSelect);
+    }
+
+    let start = document.getElementById("execute");
+    start.addEventListener("click", function() {
         if (this.classList.contains("running")) {
             this.classList.replace("running", "run");
             stop(this);
@@ -130,8 +149,11 @@ jsPlumb.ready(function() {
             this.classList.replace("run", "running");
             run(this);
         }
-    }
+    });
 
+    // Because run() is async, the execute function could finish execution before
+    // run does (i.e. infinite loop). run() will continue execution until the
+    // execute button is pressed again and the running class is removed.
     async function run(button) {
         button.innerHTML = "<p>Stop!</p>";
         let gateQueue = Array.prototype.slice.call(document.querySelectorAll(".startGate"));
@@ -240,31 +262,6 @@ jsPlumb.ready(function() {
         info.connector.svg.classList.add("selected");
         jsPlumb.repaintEverything();
         selectedElement = info;
-    }
-
-    function gateSelect() {
-        let prevSelected = document.querySelectorAll(".selected");
-        if (prevSelected.length !== 0) {
-            prevSelected[0].classList.remove("selected");
-        }
-
-        this.classList.add("selected");
-        jsPlumb.repaintEverything();
-        selectedElement = this;
-    }
-
-    function removeGateSelect() {
-        this.removeEventListener("click", gateSelect);
-    }
-
-    function inputToggle() {
-        if (this.classList.contains("true")) {
-            this.classList.replace("true", "false");
-            this.innerHTML = "<p>0</p>";
-        } else {
-            this.classList.replace("false", "true");
-            this.innerHTML = "<p>1</p>";
-        }
     }
 
     // Delete selected element when "delete" key is pressed
