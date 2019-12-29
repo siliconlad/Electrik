@@ -22,7 +22,15 @@ let outputElement = {
 
 jsPlumb.ready(function() {
     // Set a default container
-    jsPlumb.setContainer("canvas");
+    let wall = jQuery.infinitedrag("#canvas", {}, {
+        width: 10000,
+        height: 10000,
+        oncreate: function($element, col, row) {
+            $element.text("");
+        }
+    });
+
+    jsPlumb.setContainer("outer-canvas");
 
     jsPlumb.registerConnectionType("active", {
         paintStyle: {stroke: "red", strokeWidth: 3},
