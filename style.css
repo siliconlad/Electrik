@@ -16,12 +16,6 @@ html, body {
     justify-content: center;
 }
 
-#outer-canvas {
-    box-sizing: border-box;
-    height: 100%;
-    width: 98%;
-    padding: 0px 30px;
-    margin: auto;
 }
 
 #canvas {
