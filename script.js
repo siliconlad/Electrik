@@ -81,9 +81,7 @@ jsPlumb.ready(function() {
 
     function jsPlumbInit(div) {
         // Making the elements draggable
-        jsPlumb.draggable(div, {
-            containment: true,
-        });
+        jsPlumb.draggable(div);
 
         div.addEventListener("click", gateSelect);
 
