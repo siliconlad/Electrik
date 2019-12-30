@@ -22,6 +22,14 @@ let outputElement = {
 
 jsPlumb.ready(function() {
     // Set a default container
+    let wall = jQuery.infinitedrag("#canvas", {}, {
+        width: 10000,
+        height: 10000,
+        oncreate: function($element, col, row) {
+            $element.text("");
+        }
+    });
+
     jsPlumb.setContainer("canvas");
 
     jsPlumb.registerConnectionType("active", {
@@ -54,8 +62,8 @@ jsPlumb.ready(function() {
         div.classList.replace("source", "gate");
         div.classList.remove("menuItem");
 
-        div.style.left = '7em';
-        div.style.top = '7em';
+        div.style.left = (50 - parseInt($('#canvas')[0].style.left.replace(/px/,"")))+"px";
+        div.style.top = (100 - parseInt($('#canvas')[0].style.top.replace(/px/,"")))+"px";
 
         let canvas = document.getElementById("canvas");
         canvas.appendChild(div);
@@ -73,9 +81,7 @@ jsPlumb.ready(function() {
 
     function jsPlumbInit(div) {
         // Making the elements draggable
-        jsPlumb.draggable(div, {
-            containment: true,
-        });
+        jsPlumb.draggable(div);
 
         div.addEventListener("click", gateSelect);
 
