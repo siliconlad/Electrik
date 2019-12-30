@@ -62,8 +62,8 @@ jsPlumb.ready(function() {
         div.classList.replace("source", "gate");
         div.classList.remove("menuItem");
 
-        div.style.left = '7em';
-        div.style.top = '7em';
+        div.style.left = (50 - parseInt($('#canvas')[0].style.left.replace(/px/,"")))+"px";
+        div.style.top = (100 - parseInt($('#canvas')[0].style.top.replace(/px/,"")))+"px";
 
         let canvas = document.getElementById("canvas");
         canvas.appendChild(div);
