@@ -69,6 +69,7 @@ body {
 
 .jtk-connector {
     z-index: 0;
+    cursor: pointer;
 }
 
 .jtk-endpoint {
