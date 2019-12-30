@@ -30,7 +30,7 @@ jsPlumb.ready(function() {
         }
     });
 
-    jsPlumb.setContainer("outer-canvas");
+    jsPlumb.setContainer("canvas");
 
     jsPlumb.registerConnectionType("active", {
         paintStyle: {stroke: "red", strokeWidth: 3},
