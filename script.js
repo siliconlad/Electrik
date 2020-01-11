@@ -54,6 +54,10 @@ jsPlumb.ready(function() {
         sources[i].addEventListener("click", newGate);
     }
 
+    // Set callback on click of zoom button
+    $('#zoom-in')[0].addEventListener("click", zoomIn);
+    $('#zoom-out')[0].addEventListener("click", zoomOut);
+
     function newGate() {
         let div = document.createElement("div");
         div.innerHTML = this.innerHTML;
@@ -292,4 +296,24 @@ jsPlumb.ready(function() {
             }
         }
     })
+
+    function zoomIn() {
+        let current_scale = $('#canvas')[0].style.transform || "1";
+        current_scale = parseFloat(current_scale.replace(/scale\(|\)/g, ""), 10);
+        current_scale += 0.1;
+        $('#canvas').css({
+            "transform":"scale(" + current_scale + ")"
+        });
+        jsPlumb.setZoom(current_scale);
+    }
+
+    function zoomOut() {
+        let current_scale = $('#canvas')[0].style.transform || "1";
+        current_scale = parseFloat(current_scale.replace(/scale\(|\)/g, ""), 10);
+        current_scale -= 0.1;
+        $('#canvas').css({
+            "transform":"scale(" + current_scale + ")"
+        });
+        jsPlumb.setZoom(current_scale);
+    }
 });
