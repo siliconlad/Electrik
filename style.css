@@ -84,3 +84,21 @@ body {
     stroke-width:5;
     stroke:brown;
 }
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+}
+
+.zoom {
+    z-index: 30;
+    display: inline-block;
+    padding: 0.3em;
+    float: right;
+}
+
+.zoom:hover {
+    background-color: lightgrey;
+}
