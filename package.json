@@ -9,7 +9,7 @@
   "author": "Siliconlad",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^7.1.4",
+    "electron": "^7.2.4",
     "jquery": "^3.4.1",
     "jquery-ui-dist": "^1.12.1",
     "jsplumb": "^2.12.8"
